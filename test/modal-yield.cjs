@@ -4,9 +4,10 @@
  * 上一轮 S4 失败是因为测试没能打开菜单（menuOpen:false），前提没成立。
  */
 const fs = require('node:fs');
+const path = require('node:path');
 const cdp = require('./cdp.cjs');
 const TOKEN = process.env.PTT_TOKEN || '';
-const OUT = './modal.json';
+const OUT = process.env.PTT_OUT || path.join(__dirname, 'modal.json');
 const report = { checks: {}, steps: [], errors: [], probes: {} };
 function check(n, ok, d) { report.checks[n] = { ok: !!ok, detail: d }; console.log('[check] ' + (ok ? 'PASS' : 'FAIL') + ' ' + n + ' :: ' + JSON.stringify(d).slice(0, 600)); }
 function step(n, d) { report.steps.push({ n, d }); console.log('[step] ' + n + ' :: ' + JSON.stringify(d).slice(0, 400)); }
