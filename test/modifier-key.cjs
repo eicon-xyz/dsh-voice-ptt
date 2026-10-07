@@ -72,7 +72,10 @@ const CALL1 = (fn, a) => '(' + fn.toString() + ')(' + JSON.stringify(a) + ')';
     await cdp.sleep(900);
     const hint = await cdp.evaluate(session, CALL(probeHint));
     step('hint-after-pick', hint);
-    check('K1.hint-shows-modifier', !!(hint && hint.text.indexOf('\u53f3 Ctrl') !== -1), hint);
+    // The hint is localized ("Right Ctrl" on an en-US browser, "右 Ctrl" on zh-CN),
+    // so assert on the key name rather than one translation.
+    const labelled = !!(hint && /Ctrl/.test(hint.text));
+    check('K1.hint-shows-modifier', labelled, hint);
 
     // 按住右 Ctrl → 应开始录音。
     await cdp.evaluate(session, CALL(probeComposerFocus));

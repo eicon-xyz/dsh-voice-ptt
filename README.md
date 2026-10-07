@@ -1,5 +1,7 @@
 # dsh-voice-ptt
 
+English | [中文](README.zh-CN.md)
+
 Push-to-talk dictation for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): **hold a single key in the composer, speak, release** — the transcript is inserted into your draft.
 
 No chord to memorise. Hold **F2**, release, done.
@@ -32,7 +34,9 @@ The hint **is a button**. Click it to expand the candidate keys, click one, and 
 
 Modifier keys work properly: the plugin knows the hold key *is* a modifier, so it does not mistake it for a chord and pass the event through.
 
-To offer a different key, edit `KEY_OPTIONS` at the top of `lib/client.js` (a `{code, label}` array, `code` spelled as `KeyboardEvent.code`).
+The hint, the status line, and these key names follow your DSH language (`en` / `zh`).
+
+To offer a different key, edit `KEY_OPTIONS` at the top of `lib/client.js` (a `{code, labelKey}` array, `code` spelled as `KeyboardEvent.code`, `labelKey` naming an entry in the zh / en dictionaries at the top of the same file).
 
 ## Install
 
