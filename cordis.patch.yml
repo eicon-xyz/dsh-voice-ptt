@@ -1,0 +1,22 @@
+# dsh-voice-ptt — bundle patch layer
+#
+# This is the `dsh.bundle.patch` layer of the package. When the plugin is
+# installed through the official CLI —
+#
+#   dsh plugin --profile web add dsh-voice-ptt
+#
+# — the command sees this declaration, appends `dsh-voice-ptt` to the profile's
+# `dsh.profile.bundles`, and profile boot merges THIS patch file exactly like a
+# hand-written `cordis.patch.yml` mount line would. Nothing to edit by hand.
+#
+# The host half is intentionally empty: every behaviour lives in the browser
+# half (`lib/client.js`, reached through `dsh.client`). This row exists only so
+# that the bundle has a loadable plugin entry.
+#
+# Manual / development installs that mount the row themselves (a symlink in the
+# profile's node_modules plus an `- insert:` line in the profile's own
+# cordis.patch.yml) must remove that line before switching to the bundle
+# channel, or the row is mounted twice and the loader fails on the duplicate id.
+- insert:
+    - id: dsh-voice-ptt
+      name: 'dsh-voice-ptt'

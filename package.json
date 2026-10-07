@@ -1,0 +1,83 @@
+{
+  "name": "dsh-voice-ptt",
+  "version": "0.1.0",
+  "description": "Push-to-talk dictation for DeepSeek Harness: hold a single key in the composer, release, and the transcript is inserted into your draft.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eicon-xyz/dsh-voice-ptt.git"
+  },
+  "homepage": "https://github.com/eicon-xyz/dsh-voice-ptt#readme",
+  "bugs": {
+    "url": "https://github.com/eicon-xyz/dsh-voice-ptt/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "dictation",
+    "speech-to-text",
+    "push-to-talk",
+    "voice-input",
+    "accessibility"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-api-remotes": "^0.2.0-rc.1",
+    "@deepseek-ai/dsh-client-locale": "^0.2.0-rc.1",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.2.0-rc.1",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.2.0-rc.1",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "ws": "^8.18.0"
+  },
+  "scripts": {
+    "test": "node test/e2e.cjs && node test/picker.cjs && node test/modifier-key.cjs && node test/nonempty-draft.cjs && node test/modal-yield.cjs",
+    "test:e2e": "node test/e2e.cjs",
+    "test:picker": "node test/picker.cjs",
+    "test:modifier": "node test/modifier-key.cjs",
+    "test:draft": "node test/nonempty-draft.cjs",
+    "test:modal": "node test/modal-yield.cjs",
+    "make-fixture": "node test/make-fixture.cjs"
+  }
+}
